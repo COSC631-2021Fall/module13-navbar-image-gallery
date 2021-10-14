@@ -1,22 +1,28 @@
-import { Grid } from "@material-ui/core";
+import { Grid, AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import movies from "./movies"
+import TheatersIcon from '@material-ui/icons/Theaters';
+import "react-image-gallery/styles/css/image-gallery.css"
+import ImageGallery from 'react-image-gallery';
 
 function App() {
   return (
     <Grid container direction="column">
       <Grid item>
-        <header>
-          <h1>Harry Potter Movies</h1>
-        </header>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton href="/"><TheatersIcon /></IconButton>
+            <Typography>Harry Potter Movies</Typography>
+          </Toolbar>
+        </AppBar>
       </Grid>
-      <Grid item>
-        <main>
-          {
-            movies().map((movie) => {
-              return <img src={"/assets/" + movie.poster} width='200'></img>
-            })
-          }
-        </main>
+      <Grid item xs={6}>
+          <ImageGallery items={
+            movies().map(
+              (movie) => {
+                return {original: "/assets/" + movie.poster};
+              }
+            )
+          } showPlayButton={false} />
       </Grid>
     </Grid>
   );
